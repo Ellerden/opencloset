@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    title OpenCloset
+    = csrf_meta_tags
+    //= Gon::Base.render_data({})
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = action_cable_meta_tag
+  body
+    = render 'shared/nav'
+    p class="notice" = notice
+    p class="alert" = alert
+    == yield
+  footer
+  = render 'shared/footer'
