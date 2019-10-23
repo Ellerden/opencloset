@@ -6,6 +6,19 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/email/rspec'
+
+#Configuring Oauth for testing
+OmniAuth.config.test_mode = true
+
+omniauth_hash = { provider: 'vkontakte',
+                  uid: '12345',
+                  info: {
+                        name: 'User Test',
+                        email: 'user@test.com',
+                        nickname: 'TestForce'
+                    }
+                }
+OmniAuth.config.add_mock(:vkontakte, omniauth_hash)
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

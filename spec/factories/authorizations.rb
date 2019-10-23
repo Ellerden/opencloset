@@ -1,0 +1,12 @@
+FactoryBot.define do
+  factory :authorization do
+    association :user
+    provider { "MyString" }
+    uid { "MyString" }
+    linked_email { 'test@test.ru' }
+    name { "MyString" }
+    username { "MyString" }
+    city { "MyString" }
+    confirmed_at { Time.now }
+  end
+end
