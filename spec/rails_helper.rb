@@ -7,18 +7,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/email/rspec'
 
-#Configuring Oauth for testing
-OmniAuth.config.test_mode = true
-
-omniauth_hash = { provider: 'vkontakte',
-                  uid: '12345',
-                  info: {
-                        name: 'User Test',
-                        email: 'user@test.com',
-                        nickname: 'TestForce'
-                    }
-                }
-OmniAuth.config.add_mock(:vkontakte, omniauth_hash)
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -48,6 +36,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
+  config.include OmniauthMacros, type: :feature
+
+  Capybara.javascript_driver = :selenium_chrome
+  #Capybara.javascript_driver = :selenium_chrome_headless
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.formatter = :documentation
@@ -77,6 +69,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+OmniAuth.config.test_mode = true
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

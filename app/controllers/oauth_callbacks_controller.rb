@@ -36,7 +36,8 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def sign_in_via_provider(provider)
-    @user = User.find_for_oauth(current_auth)
+    #pp request.env['omniauth.auth']
+    @user = User.find_for_oauth(request.env['omniauth.auth'])
     # if it's first auth without email
     unless @user || has_email?
       save_auth_info_to_session
@@ -51,7 +52,7 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def has_email?
-    current_auth.info.email.present?
+    request.env['omniauth.auth']['info']['email'].present?
   end
 
   def save_auth_info_to_session
@@ -62,10 +63,4 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
                               city: request.env['omniauth.auth']['info']['location'] } 
                       }
   end
-
-  def current_auth
-    @current_auth ||= request.env['omniauth.auth']
-  end
-
-  helper_method :current_auth
 end

@@ -11,7 +11,7 @@ RSpec.describe Authorization, type: :model do
 
   describe '#activate_email' do
     let(:user) { create(:user, confirmed_at: nil) }
-    let(:auth) { create(:authorization, user: user, name: 'John Snow', city: 'Westeros', confirmed_at: nil) }
+    let(:auth) { create(:authorization, user: user, name: 'John Snow', city: 'Winterfell', confirmed_at: nil) }
 
     before { auth.activate_email }
 
@@ -22,7 +22,7 @@ RSpec.describe Authorization, type: :model do
 
     it 'updates users data from auth if it was empty' do
       expect(user.name).to eq 'John Snow'
-      expect(user.city).to eq 'Westeros'
+      expect(user.city).to eq 'Winterfell'
     end
   end
 
