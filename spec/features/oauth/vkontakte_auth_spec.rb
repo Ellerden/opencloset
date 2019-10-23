@@ -53,8 +53,27 @@ feature 'User can sign in via social networks', %q{
     end
 
     context 'User somehow already exists' do
-      scenario 'Already hab been authorized via VK before and uses VK to authorize again'
-      scenario 'Existing user signs in via Vkontakte for the 1st time'
+      given!(:user) { create(:user, confirmed_at: Time.now) }
+
+      scenario 'Already hab been authorized via VK before and uses VK to authorize again' do
+        auth = mock_auth_hash(:vkontakte, user.email)
+        authorization = create(:authorization, user: user, linked_email: user.email, provider: auth.provider, 
+                               uid: auth.uid, confirmed_at: Time.now)
+        visit new_user_session_path
+        click_on 'Sign in with Vkontakte'
+        expect(page).to have_content(user.email)
+        expect(page).to have_content('Successfully authenticated from Vkontakte account')
+      end
+
+      scenario 'Existing user signs in via Vkontakte for the 1st time' do
+        auth = mock_auth_hash(:vkontakte, user.email)
+        visit new_user_session_path
+        click_on 'Sign in with Vkontakte'
+        expect(page).to have_content(user.email)
+        expect(page).to have_content('Successfully authenticated from Vkontakte account')
+
+
+      end
     end
   end
 end

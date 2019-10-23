@@ -22,5 +22,6 @@ class FindForOauthService
     
     user.authorizations.create(provider: @auth.provider, uid: @auth.uid, city: @auth.city, linked_email: email, name: full_name, username: username)
     user.update!(confirmed_at: Time.now) unless user.confirmed?
+    user
   end
 end

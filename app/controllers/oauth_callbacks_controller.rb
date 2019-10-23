@@ -36,7 +36,6 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def sign_in_via_provider(provider)
-    #pp request.env['omniauth.auth']
     @user = User.find_for_oauth(request.env['omniauth.auth'])
     # if it's first auth without email
     unless @user || has_email?
