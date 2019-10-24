@@ -9,7 +9,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
 
       context 'Vkontakte provides an email' do
         before do
-          # allow(User).to receive(:find_for_oauth).and_return(user)
+          allow(User).to receive(:find_for_oauth).and_return(user)
           # get :vkontakte
           request.env["omniauth.auth"] = mock_auth_hash(:vkontakte, user.email)
           get :vkontakte

@@ -16,10 +16,10 @@ class FindForOauthService
     user = User.find_or_initialize_with_skip_confirmation(@auth.info[:email])
     # Create authorization with this SM for user
     email = @auth.info[:email]
-    full_name = @auth.info[:name] if @auth.info[:name].blank?
-    username = @auth.info[:nickname] if @auth.info[:name].blank?
-    city = @auth.info[:city] if @auth.info[:city].blank?
-    
+    full_name = @auth.info[:name] #unless @auth.info[:name].blank?
+    username = @auth.info[:nickname] #unless @auth.info[:name].blank?
+    city = @auth.info[:city] #unless @auth.info[:city].blank?
+
     user.authorizations.create(provider: @auth.provider, uid: @auth.uid, city: @auth.city, linked_email: email, name: full_name, username: username)
     user.update!(confirmed_at: Time.now) unless user.confirmed?
     user

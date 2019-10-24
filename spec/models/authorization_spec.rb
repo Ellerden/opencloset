@@ -10,7 +10,7 @@ RSpec.describe Authorization, type: :model do
 
 
   describe '#activate_email' do
-    let(:user) { create(:user, confirmed_at: nil) }
+    let(:user) { create(:user, name: '', confirmed_at: nil) }
     let(:auth) { create(:authorization, user: user, name: 'John Snow', city: 'Winterfell', confirmed_at: nil) }
 
     before { auth.activate_email }
