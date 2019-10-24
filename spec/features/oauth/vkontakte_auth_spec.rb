@@ -71,8 +71,6 @@ feature 'User can sign in via social networks', %q{
         click_on 'Sign in with Vkontakte'
         expect(page).to have_content(user.email)
         expect(page).to have_content('Successfully authenticated from Vkontakte account')
-
-
       end
     end
   end
