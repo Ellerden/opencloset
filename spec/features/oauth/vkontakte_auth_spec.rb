@@ -46,7 +46,6 @@ feature 'User can sign in via social networks', %q{
 
           # log in via Vkontakte after confirming email
           click_on 'Sign in with Vkontakte'
-          expect(page).to have_content('test@test.com')
           expect(page).to have_content('Successfully authenticated from Vkontakte account')
         end 
       end
@@ -61,7 +60,7 @@ feature 'User can sign in via social networks', %q{
                                uid: auth.uid, confirmed_at: Time.now)
         visit new_user_session_path
         click_on 'Sign in with Vkontakte'
-        expect(page).to have_content(user.email)
+        expect(page).to have_content(user.name)
         expect(page).to have_content('Successfully authenticated from Vkontakte account')
       end
 
@@ -69,7 +68,7 @@ feature 'User can sign in via social networks', %q{
         auth = mock_auth_hash(:vkontakte, user.email)
         visit new_user_session_path
         click_on 'Sign in with Vkontakte'
-        expect(page).to have_content(user.email)
+        expect(page).to have_content(user.name)
         expect(page).to have_content('Successfully authenticated from Vkontakte account')
       end
     end
