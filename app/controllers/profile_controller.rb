@@ -1,6 +1,6 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!, except: %i[show]
-  #authorize_resource class: User
+  authorize_resource class: User
   
   def show
     if profile
