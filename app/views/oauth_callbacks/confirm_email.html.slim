@@ -1,0 +1,8 @@
+h2 One more step
+p It seems like we don't have your email
+= form_with(url: confirm_email_path, method: :post) do |f|
+  p
+    = f.label :Email
+    =< f.email_field :email
+  = f.submit 'Confirm'
+= render 'devise/shared/links'

@@ -1,0 +1,12 @@
+div class="navbar navbar-light bg-light"
+  span class="navbar-text"
+    - if user_signed_in?
+      - greeting_name = current_user.name unless current_user.name.empty?  
+      b Welcome,
+      b  =< link_to " #{ greeting_name || current_user.email }!", profile_path(current_user.id)
+      =< link_to '   Log Out', destroy_user_session_path, method: :delete
+    - else
+      => link_to 'Sign in', new_user_session_path
+      = link_to 'Sign Up', new_user_registration_path
+
+  //= render "search/form"
